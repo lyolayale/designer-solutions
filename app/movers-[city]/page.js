@@ -1,17 +1,17 @@
 // app/movers-[city]/page.js
 
-// 1. IMPORT: Notice the extra dot (../) so Next.js can find your components folder
+// 1. IMPORT YOUR DESIGN COMPONENTS
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
 import About from "../components/About";
 import Footer from "../components/Footer";
 
-// 2. METADATA: This tells Google exactly what this specific city page is about
-export async function generateMetadata({ params }) {
-  const { city } = await params;
-
-  // This capitalizes the first letter (e.g., "decatur" becomes "Decatur")
+// 2. THE CORRECT METADATA PATTERN FOR NEXT.JS 16
+export async function generateMetadata(props) {
+  // We accept "props" as a plain object, then await the internal params promise
+  const params = await props.params;
+  const city = params.city;
   const cityName = city.charAt(0).toUpperCase() + city.slice(1);
 
   return {
@@ -23,9 +23,11 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// 3. VISUAL CONTENT: This renders your exact homepage layout uniformly
-export default async function CityPage({ params }) {
-  const { city } = await params;
+// 3. THE CORRECT PAGE RENDER PATTERN FOR NEXT.JS 16
+export default async function CityPage(props) {
+  // Safely resolve the dynamic params object using the same server promise pattern
+  const params = await props.params;
+  const city = params.city;
   const cityName = city.charAt(0).toUpperCase() + city.slice(1);
 
   return (
