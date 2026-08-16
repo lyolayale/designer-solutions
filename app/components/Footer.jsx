@@ -56,7 +56,7 @@ export default function Footer() {
             Call us directly or fill out the form for a free quote.
           </p>
           <a
-            href="tel:+1234567890"
+            href="tel:+14045497025"
             className="bg-blue-400 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-blue-600 transition mb-12 inline-block"
           >
             📞 Call (404) 549-7025
@@ -95,7 +95,7 @@ export default function Footer() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-orange-500 outline-none"
+                  className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 outline-none"
                 />
               </div>
               <div>
@@ -106,7 +106,7 @@ export default function Footer() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-orange-500 outline-none"
+                  className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 outline-none"
                 />
               </div>
               <div>

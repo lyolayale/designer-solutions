@@ -34,7 +34,7 @@ export default function LocalSchema() {
       opens: "08:00",
       closes: "18:00",
     },
-    foundingDate: "1998",
+    foundingDate: "2000",
     priceRange: "$$",
   };
 
