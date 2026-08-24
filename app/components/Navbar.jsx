@@ -20,8 +20,10 @@ export default function Navbar() {
             />
           </a>
           <a href="#">
-            <h2 className="text-xl md:text-2xl font-bold text-blue-400">DSI</h2>
-            <p>Moving & Storage</p>
+            <h2 className="text-xl md:text-2xl font-bold text-blue-400">
+              Designer Solutions, LLC
+            </h2>
+            <p>DSI Moving & Storage</p>
           </a>
         </div>
 
