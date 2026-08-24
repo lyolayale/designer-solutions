@@ -73,7 +73,7 @@ export default function Footer() {
             <p className="text-xl font-bold mb-2">
               <span className="text-blue-400">DSI</span> Moving & Storage
             </p>
-            <p className="text-gray-500">2084 Faulkner Rd NE,</p>
+            <p className="text-gray-500">2152 Faulkner Rd NE,</p>
             <p className="text-gray-500">Altanta GA 30324</p>
           </div>
         </div>
