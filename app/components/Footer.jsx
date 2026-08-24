@@ -198,7 +198,7 @@ export default function Footer() {
                   rows="3"
                   value={formData.details}
                   onChange={handleChange}
-                  className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-orange-500 outline-none"
+                  className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 outline-none"
                 ></textarea>
               </div>
               <button
