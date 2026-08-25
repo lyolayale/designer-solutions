@@ -70,7 +70,7 @@ export default function Footer() {
   };
 
   return (
-    <footer id="contact" className="bg-gray-900 text-white py-16 pb-8">
+    <footer className="bg-gray-900 text-white py-16 pb-8">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
           <h2 className="text-3xl font-bold mb-8 text-blue-400">
@@ -85,7 +85,7 @@ export default function Footer() {
           >
             📞 Call (404) 549-7025
           </a>
-          <div className="border-t border-gray-700 pt-8 mt-8">
+          <div id="contact" className="border-t border-gray-700 pt-8 mt-8">
             <Image
               src="/mini-logo.avif"
               alt="Designer Solutions movers loading a truck in Tucker GA"
