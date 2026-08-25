@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
+import { FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
 
 export default function Footer() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,28 @@ export default function Footer() {
     details: "",
   });
   const [status, setStatus] = useState("idle");
+
+  const socials = [
+    {
+      id: 1,
+      icon: <FaFacebook />,
+      url: "https://facebook.com",
+      label: "Twitter",
+    },
+
+    {
+      id: 2,
+      icon: <FaTiktok />,
+      url: "https://tiktok.com",
+      label: "LinkedIn",
+    },
+    {
+      id: 3,
+      icon: <FaInstagram />,
+      url: "https://instagram.com",
+      label: "Instagram",
+    },
+  ];
 
   const handleChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -75,6 +99,20 @@ export default function Footer() {
             </p>
             <p className="text-gray-500">2152 Faulkner Rd NE,</p>
             <p className="text-gray-500">Altanta GA 30324</p>
+          </div>
+          <div className="flex gap-5 mt-1 w-1/4">
+            {socials.map(social => (
+              <Link
+                key={social.id}
+                href={social.url}
+                aria-label={social.label}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-blue-500 transition-colors text-2xl"
+              >
+                {social.icon}
+              </Link>
+            ))}
           </div>
         </div>
 
