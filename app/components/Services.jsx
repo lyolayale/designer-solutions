@@ -9,7 +9,7 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
   return (
     <div className="w-full h-auto bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
       {/* Image */}
-      <div className="relative w-full h-52 flex-shrink-0">
+      <div className="relative w-full h-52 shrink-0">
         <Image
           src={service.image}
           alt={`${service.title} services`}
@@ -20,7 +20,7 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
       </div>
 
       {/* Card Content Wrapper */}
-      <div className="p-5 flex flex-col flex-grow">
+      <div className="p-5 flex flex-col grow">
         {/* FIXED TITLE CONTAINER: Standardizes height regardless of 1-line or 2-line text */}
         <div className="h-16 flex items-center justify-center text-center mb-2">
           <h3 className="text-xl font-bold text-blue-900 line-clamp-2">
@@ -185,9 +185,9 @@ export default function Services() {
         {/* ============================= */}
         {/* SEPARATED COLUMNS LAYOUT */}
         {/* ============================= */}
-        <div className="flex flex-col md:flex-row gap-8 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* COLUMN 1 */}
-          <div className="w-full md:w-1/3 flex flex-col gap-8">
+          <div className="w-full lg:w-1/3 flex flex-col gap-8">
             <ServiceCard
               service={services[0]}
               index={0}
@@ -203,7 +203,7 @@ export default function Services() {
           </div>
 
           {/* COLUMN 2 */}
-          <div className="w-full md:w-1/3 flex flex-col gap-8">
+          <div className="w-full lg:w-1/3 flex flex-col gap-8">
             <ServiceCard
               service={services[1]}
               index={1}
@@ -219,7 +219,7 @@ export default function Services() {
           </div>
 
           {/* COLUMN 3 */}
-          <div className="w-full md:w-1/3 flex flex-col gap-8">
+          <div className="w-full lg:w-1/3 flex flex-col gap-8">
             <ServiceCard
               service={services[2]}
               index={2}
