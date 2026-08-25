@@ -127,7 +127,7 @@ export default function Footer() {
                   name="move_date"
                   value={formData.move_date}
                   onChange={handleChange}
-                  className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-600 outline-none"
+                  className="block w-full min-w-full appearance-none p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-600 outline-none"
                 />
               </div>
               <div>
