@@ -74,7 +74,7 @@ export default function Services() {
   const services = [
     {
       title: "Local Moving",
-      image: "/local-moving.jpeg",
+      image: "/local-moving.webp",
       description:
         "Expert moving services across Buckhead, GA, and the greater Atlanta area. Fast, careful, and reliable.",
       details: [
@@ -168,7 +168,7 @@ export default function Services() {
         {/* ============================= */}
         {/* COMPANY HEADER */}
         {/* ============================= */}
-        <section className="bg-blue-900 flex flex-col gap-10 justify-center items-center p-5 rounded-2xl mt-10 mb-20">
+        {/* <section className="bg-blue-900 flex flex-col gap-10 justify-center items-center p-5 rounded-2xl mt-10 mb-20">
           <Image
             src="/large-logo.avif"
             alt="Designer Solutions moving truck in Tucker GA"
@@ -177,6 +177,29 @@ export default function Services() {
             priority
             className="object-cover rounded-[10%]"
           />
+          <h2 className="text-3xl font-bold text-center text-white">
+            DSI Moving & Storage
+          </h2>
+        </section> */}
+
+        <section className="bg-blue-900 flex flex-col gap-10 justify-center items-center p-5 rounded-2xl mt-10 mb-20">
+          {/* Container explicitly forced to your exact image dimensions */}
+          <div className="relative w-75 h-50 rounded-[10%] overflow-hidden">
+            <Image
+              src="/large-logo.avif"
+              alt="Designer Solutions moving truck in Tucker GA"
+              width={200}
+              height={200}
+              priority
+              className="object-cover w-full h-full brightness-125"
+            />
+
+            {/* Always-visible absolute overlay */}
+            <div className="absolute inset-0 bg-black/30 flex justify-center items-center">
+              <span className="text-white font-semibold text-sm tracking-wide"></span>
+            </div>
+          </div>
+
           <h2 className="text-3xl font-bold text-center text-white">
             DSI Moving & Storage
           </h2>
