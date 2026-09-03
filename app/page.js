@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import Reveal from "./components/Reveal";
 
 export const metadata = {
   title: "Movers Buckhead GA | Designer Solutions Moving Company",
@@ -12,11 +13,19 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main>
+    <main className="w-full min-h-screen block relative">
       <Navbar />
-      <Hero />
+
+      <Reveal>
+        <Hero />
+      </Reveal>
+
       <Services />
-      <About />
+
+      <Reveal delay={100}>
+        <About />
+      </Reveal>
+
       <Footer />
     </main>
   );

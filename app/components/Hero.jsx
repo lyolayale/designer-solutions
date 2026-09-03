@@ -4,6 +4,7 @@ export default function Hero({ cityName }) {
   return (
     <section className="relative min-h-150 flex items-center justify-center overflow-hidden">
       {/* Background Image */}
+
       <div className="absolute inset-0 w-full h-full z-0">
         <Image
           src="/image.png"
@@ -12,6 +13,7 @@ export default function Hero({ cityName }) {
           className="object-cover brightness-115"
           priority
         />
+
         <div className="absolute inset-0 bg-black opacity-30"></div>
       </div>
       {/* **** */}

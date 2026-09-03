@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Reveal from "./Reveal";
 
 function ServiceCard({ service, index, openCard, toggleCard }) {
   const isOpen = openCard === index;
@@ -9,15 +10,17 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
   return (
     <div className="w-full h-auto bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
       {/* Image */}
-      <div className="relative w-full h-52 shrink-0">
-        <Image
-          src={service.image}
-          alt={`${service.title} services`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px), 100vw, 33vw"
-        />
-      </div>
+      <Reveal delay={100}>
+        <div className="relative w-full h-52 shrink-0">
+          <Image
+            src={service.image}
+            alt={`${service.title} services`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px), 100vw, 33vw"
+          />
+        </div>
+      </Reveal>
 
       {/* Card Content Wrapper */}
       <div className="p-5 flex flex-col grow">
@@ -165,25 +168,9 @@ export default function Services() {
   return (
     <section id="services" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        {/* ============================= */}
-        {/* COMPANY HEADER */}
-        {/* ============================= */}
-        {/* <section className="bg-blue-900 flex flex-col gap-10 justify-center items-center p-5 rounded-2xl mt-10 mb-20">
-          <Image
-            src="/large-logo.avif"
-            alt="Designer Solutions moving truck in Tucker GA"
-            width={200}
-            height={100}
-            priority
-            className="object-cover rounded-[10%]"
-          />
-          <h2 className="text-3xl font-bold text-center text-white">
-            DSI Moving & Storage
-          </h2>
-        </section> */}
-
         <section className="bg-blue-900 flex flex-col gap-10 justify-center items-center p-5 rounded-2xl mt-10 mb-20">
           {/* Container explicitly forced to your exact image dimensions */}
+
           <div className="relative w-75 h-50 rounded-[10%] overflow-hidden">
             <Image
               src="/large-logo.avif"
@@ -195,9 +182,7 @@ export default function Services() {
             />
 
             {/* Always-visible absolute overlay */}
-            <div className="absolute inset-0 bg-black/30 flex justify-center items-center">
-              <span className="text-white font-semibold text-sm tracking-wide"></span>
-            </div>
+            <div className="absolute inset-0 bg-black/20 flex justify-center items-center"></div>
           </div>
 
           <h2 className="text-3xl font-bold text-center text-white">
