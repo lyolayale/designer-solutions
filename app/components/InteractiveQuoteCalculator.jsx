@@ -37,12 +37,12 @@ export default function InteractiveQuoteCalculator() {
   return (
     <div
       id="estimate"
-      className="mx-auto my-7 my-30 max-w-[650px] bg-white rounded-2xl shadow-xl overflow-hidden font-sans border border-gray-100"
+      className="mx-auto my-30 max-w-162.5 bg-white rounded-2xl shadow-xl overflow-hidden font-sans border border-gray-100"
     >
       {/* 1. VISUAL ANIMATION OVERVIEW PANEL */}
       <div className="bg-slate-50 py-7 px-6 border-b border-slate-200 relative overflow-hidden h-[140px]">
         {/* Background Skyline Silhouettes */}
-        <div className="absolute bottom-0 left-[40%] flex gap-2 items-end opacity-[0.08] pointer-events-none">
+        <div className="absolute bottom-0 left-[10%] flex gap-2 items-end opacity-[0.08] pointer-events-none">
           <div className="w-10 h-[120px] bg-black" />
           <div className="w-[35px] h-[90px] bg-black" />
           <div className="w-12 h-[140px] bg-black" />
@@ -51,7 +51,7 @@ export default function InteractiveQuoteCalculator() {
         </div>
 
         {/* Transit Arc Tracking Path */}
-        <svg className="absolute top-10 left-[10%] w-[80%] h-20 pointer-events-none">
+        <svg className="absolute top-10 left-[20%] w-[80%] h-20 pointer-events-none">
           <path
             d="M 10 70 Q 170 -20 340 70"
             fill="transparent"
@@ -74,14 +74,14 @@ export default function InteractiveQuoteCalculator() {
 
         {/* Origin / Destination Markers */}
         <div className="absolute bottom-4 left-[8%] text-center">
-          <div className="w-3.5 h-3.5 rounded-full border-[3px border-blue-500 bg-white mx-auto mb-1.5" />
+          <div className="w-3.5 h-3.5 rounded-full border-[3px] border-blue-500 bg-white mx-auto" />
           <span className="text-xs font-semibold text-slate-800">
             Downtown Origin
           </span>
         </div>
 
         <div className="absolute bottom-4 right-[8%] text-center">
-          <div className="w-3.5 h-3.5 rounded-full border-[3px] border-emerald-500 bg-white mx-auto mb-1.5" />
+          <div className="w-3.5 h-3.5 rounded-full border-[3px] border-emerald-500 bg-white mx-auto" />
           <span className="text-xs font-semibold text-slate-800">
             Outside Atlanta Metro
           </span>
