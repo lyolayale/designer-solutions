@@ -86,10 +86,7 @@ export default function QuoteGenerator() {
     );
   }
   return (
-    <div
-      id="pricing"
-      className="mx-auto my-10 max-w-[650px] bg-white rounded-xl shadow-xl overflow-hidden font-sans border border-gray-100"
-    >
+    <div className="mx-auto my-10 max-w-[650px] bg-white rounded-xl shadow-xl overflow-hidden font-sans border border-gray-100">
       {/* Header & Progress Indicator */}
       <div className="bg-[#1e3a8a] py-6 px-8 text-white text-center">
         <h2 className="m-0 text-2xl font-bold tracking-wide">

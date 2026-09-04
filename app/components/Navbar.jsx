@@ -89,11 +89,11 @@ export default function Navbar() {
             About
           </a>
           <a
-            href="#pricing"
+            href="#estimate"
             onClick={() => setIsMenuOpen(false)}
             className="hover:text-blue-400 transition"
           >
-            Pricing
+            Estimate
           </a>
           <a
             href="#contact"
@@ -129,11 +129,11 @@ export default function Navbar() {
               About
             </a>
             <a
-              href="#pricing"
+              href="#estimate"
               onClick={() => setIsMenuOpen(false)}
               className="hover:text-blue-400 transition"
             >
-              Pricing
+              Estimate
             </a>
             <a
               href="#contact"

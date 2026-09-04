@@ -35,7 +35,10 @@ export default function InteractiveQuoteCalculator() {
   );
 
   return (
-    <div className="mx-auto my-7 my-30 max-w-[650px] bg-white rounded-2xl shadow-xl overflow-hidden font-sans border border-gray-100">
+    <div
+      id="estimate"
+      className="mx-auto my-7 my-30 max-w-[650px] bg-white rounded-2xl shadow-xl overflow-hidden font-sans border border-gray-100"
+    >
       {/* 1. VISUAL ANIMATION OVERVIEW PANEL */}
       <div className="bg-slate-50 py-7 px-6 border-b border-slate-200 relative overflow-hidden h-[140px]">
         {/* Background Skyline Silhouettes */}
