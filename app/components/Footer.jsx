@@ -90,7 +90,7 @@ export default function Footer() {
       id="footer-booking-intake"
       className="bg-gray-900 text-white py-16 pb-8 border-t border-gray-800"
     >
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-[20%] w-full">
         {/* Left Aspect Side Column */}
         <div>
           <h2 className="text-3xl font-bold mb-8 text-blue-400">
@@ -138,7 +138,7 @@ export default function Footer() {
         </div>
 
         {/* Right Aspect Side Column: Linked Intake Form */}
-        <div className="bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-gray-700">
+        <div className="bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-gray-700 w-100 m-auto">
           <h3 className="text-xl font-bold mb-5 border-b border-gray-700 pb-2.5">
             📝 Secured Routing Profile
           </h3>
@@ -265,14 +265,17 @@ export default function Footer() {
                   <label className="block text-xs mb-1 text-blue-400 font-semibold">
                     Bedrooms (Linked)
                   </label>
-                  <input
-                    type="number"
-                    min={0}
+                  <select
                     name="num_bedrooms"
                     value={localContact.num_bedrooms}
                     onChange={handleLocalChange}
-                    className="w-full p-2.5 rounded bg-gray-700 text-white border border-blue-500/40 text-xs outline-none"
-                  />
+                    className="w-full p-2.5 rounded bg-gray-700 text-white border border-blue-500/40 text-xs outline-none cursor-pointer"
+                  >
+                    <option value="1">1 Bedroom / Studio</option>
+                    <option value="2">2 Bedrooms</option>
+                    <option value="3">3 Bedrooms</option>
+                    <option value="4+">4+ Bedrooms</option>
+                  </select>
                 </div>
               </div>
 
