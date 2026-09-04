@@ -312,7 +312,7 @@ export default function QuoteGenerator() {
             <button
               type="button"
               onClick={nextStep}
-              className="bg-[#1e3a8a] text-white hover:bg-blue-900 font-semibold py-3 px-6 rounded-lg transition-colors cursor-pointer"
+              className="bg-[#1e3a8a] text-white hover:bg-blue-500 font-semibold py-3 px-6 rounded-lg transition-colors cursor-pointer"
             >
               Continue
             </button>
@@ -320,7 +320,7 @@ export default function QuoteGenerator() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-[#10b981] text-white hover:bg-emerald-600 font-bold py-3 px-7 rounded-lg transition-all duration-200 cursor-pointer disabled:bg-emerald-400 disabled:cursor-not-allowed shadow-md shadow-emerald-500/20"
+              className="bg-[#1e3a8a] text-white hover:bg-blue-500 font-semibold py-3 px-7 rounded-lg transition-all duration-200 cursor-pointer disabled:bg-[#1e3a8a] disabled:cursor-not-allowed"
             >
               {loading ? "Submitting..." : "Get My Free Quote"}
             </button>
