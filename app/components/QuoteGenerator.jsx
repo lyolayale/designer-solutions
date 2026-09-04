@@ -3,331 +3,149 @@ import React, { useState } from "react";
 
 export default function QuoteGenerator() {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    movingDate: "",
-    originAddress: "",
-    destinationAddress: "",
-    propertyType: "",
-    bedrooms: "1",
-    additionalDetails: "",
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [propertyType, setPropertyType] = useState("Apartment");
+  const [bedrooms, setBedrooms] = useState("1");
 
-  const estimateHours = {
-    1: "2 - 4 hours",
-    2: "4 - 6 hours",
-    3: "6 - 8 hours",
-    "4+": "8+ hours (Multi-crew)",
-  };
+  const handleStepSelection = type => {
+    setPropertyType(type);
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const selectProperty = type => {
-    setFormData(prev => ({ ...prev, propertyType: type }));
-  };
-
-  const nextStep = () => setStep(prev => Math.min(prev + 1, 3));
-  const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      // Integration point for your n8n webhook / Supabase client
-      console.log("Quote Request Submitted:", formData);
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error("Submission error:", error);
-    } finally {
-      setLoading(false);
+    // Broadcast the selection to the browser window immediately
+    if (typeof window !== "undefined") {
+      const event = new CustomEvent("syncMoveData", {
+        detail: { property_type: type, num_bedrooms: bedrooms },
+      });
+      window.dispatchEvent(event);
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="mx-auto my-6 max-w-[600px] w-11/12 rounded-2xl bg-white p-6 sm:p-10 text-center shadow-xl border border-gray-100 font-sans">
-        <div className="text-5xl sm:text-6xl mb-4 sm:mb-5">🚚</div>
-        <h2 className="text-[#1e3a8a] mb-3 text-2xl sm:text-3xl font-bold tracking-tight">
-          Thank You, {formData.fullName}!
-        </h2>
-        <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-          Your custom quote request has been received. Our expert team will
-          review your details and reach out within 24 hours with your
-          competitive pricing.
-        </p>
-        <button
-          onClick={() => {
-            setIsSubmitted(false);
-            setStep(1);
-            setFormData({
-              fullName: "",
-              email: "",
-              phone: "",
-              movingDate: "",
-              originAddress: "",
-              destinationAddress: "",
-              propertyType: "",
-              bedrooms: "1",
-              additionalDetails: "",
-            });
-          }}
-          className="mt-6 w-full sm:w-auto bg-[#1e3a8a] text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-900 transition-colors cursor-pointer shadow-md"
-        >
-          Request Another Quote
-        </button>
-      </div>
-    );
-  }
+  const handleBedroomSelection = e => {
+    const value = e.target.value;
+    setBedrooms(value);
+
+    // Broadcast the selection to the browser window immediately
+    if (typeof window !== "undefined") {
+      const event = new CustomEvent("syncMoveData", {
+        detail: { property_type: propertyType, num_bedrooms: value },
+      });
+      window.dispatchEvent(event);
+    }
+  };
+
+  const handleScrollToFooter = () => {
+    const footerFormSection = document.getElementById("footer-booking-intake");
+    if (footerFormSection) {
+      footerFormSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <div
-      id="pricing"
-      className="mx-auto my-6 max-w-[650px] w-11/12 bg-white rounded-2xl shadow-xl overflow-hidden font-sans border border-gray-100"
-    >
-      {/* Header & Progress Indicator */}
-      <div className="bg-[#1e3a8a] py-5 px-6 sm:px-8 text-white text-center">
-        <h2 className="m-0 text-xl sm:text-2xl font-bold tracking-wide">
-          Get Your Free Moving Quote
+    <div className="mx-auto max-w-[550px] w-11/12 bg-white text-slate-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 font-sans">
+      {/* Header Panel */}
+      <div className="bg-[#1e3a8a] py-6 px-6 text-white text-center">
+        <h2 className="m-0 text-xl font-bold tracking-wide">
+          Moving Request Setup
         </h2>
-        <p className="m-0 mt-1 text-xs sm:text-sm opacity-85 font-light">
-          Trusted moving services across Buckhead & Atlanta
+        <p className="m-0 mt-1 text-xs opacity-80 font-light">
+          Tell us about your home to configure your routing profile
         </p>
 
-        {/* Progress Dots */}
-        <div className="flex justify-center gap-2.5 mt-4 sm:mt-5">
-          {[1, 2, 3].map(num => (
-            <div
-              key={num}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                step === num
-                  ? "w-6 bg-white"
-                  : step >= num
-                    ? "w-2 bg-white"
-                    : "w-2 bg-white/40"
-              }`}
-            />
-          ))}
+        <div className="flex justify-center gap-2 mt-4">
+          <div
+            className={`h-1.5 rounded-full transition-all duration-300 ${step === 1 ? "w-6 bg-white" : "w-2 bg-white/40"}`}
+          />
+          <div
+            className={`h-1.5 rounded-full transition-all duration-300 ${step === 2 ? "w-6 bg-white" : "w-2 bg-white/40"}`}
+          />
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-5 sm:p-8">
-        {/* STEP 1: Move Details */}
-        {step === 1 && (
-          <div className="space-y-4 sm:space-y-5">
-            <h3 className="text-gray-800 text-base sm:text-lg font-bold mt-0 mb-3">
-              1. Tell Us About Your Move
-            </h3>
+      <div className="p-6 sm:p-8">
+        {step === 1 ? (
+          <div className="space-y-5">
             <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Property Type
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">
+                1. Select Property Type
               </label>
-              {/* Responsive Grid: 2 Columns on Mobile, 3 Columns on Tablets/Desktop */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-                {["House", "Apartment", "Condo", "Townhouse", "Commercial"].map(
-                  type => (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => selectProperty(type)}
-                      className={`py-2.5 px-2 rounded-lg border text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
-                        formData.propertyType === type
-                          ? "border-2 border-2-[#1e3a8a] bg-blue-50 text-[#1e3a8a] font-bold"
-                          : "border-gray-300 bg-white text-gray-700 hover:border-gray-400"
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ),
-                )}
+              <div className="grid grid-cols-3 gap-2">
+                {["House", "Apartment", "Condo"].map(type => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => handleStepSelection(type)}
+                    className={`py-3 px-1 rounded-xl text-xs font-bold transition-all border cursor-pointer text-center block w-full ${
+                      propertyType === type
+                        ? "bg-blue-600 border-blue-600 text-white shadow-md"
+                        : "bg-slate-50 border-gray-200 text-slate-600 hover:bg-slate-100"
+                    }`}
+                  >
+                    {type === "House"
+                      ? "🏡 "
+                      : type === "Apartment"
+                        ? "🏢 "
+                        : "🏙️ "}
+                    <span className="block mt-1">{type}</span>
+                  </button>
+                ))}
               </div>
             </div>
 
             <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Number of Bedrooms
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                2. Home Layout Size
               </label>
               <select
-                name="bedrooms"
-                value={formData.bedrooms}
-                onChange={handleInputChange}
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 bg-white focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow"
+                value={bedrooms}
+                onChange={handleBedroomSelection}
+                className="w-full p-3 rounded-xl border border-gray-300 bg-white text-sm outline-none focus:border-blue-600 text-slate-700 cursor-pointer"
               >
-                <option value="1">1 Bedroom / Studio</option>
-                <option value="2">2 Bedrooms</option>
-                <option value="3">3 Bedrooms</option>
-                <option value="4+">4+ Bedrooms</option>
+                <option value="1">1 Bedroom / Studio Apt</option>
+                <option value="2">2 Bedroom Space</option>
+                <option value="3">3 Bedroom Household</option>
+                <option value="4+">4+ Bedrooms Multi-Crew</option>
               </select>
             </div>
 
-            <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Preferred Moving Date
-              </label>
-              <input
-                type="date"
-                name="movingDate"
-                value={formData.movingDate}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow"
-              />
-            </div>
-
-            {/* Micro-interaction Value Add */}
-            <div className="bg-gray-50 border border-gray-100 p-3 sm:p-4 rounded-lg flex justify-between items-center mt-2">
-              <span className="text-xs sm:text-sm text-gray-600">
-                ⏱️ Estimated Job Timeline:
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-[#1e3a8a]">
-                {estimateHours[formData.bedrooms]}
-              </span>
-            </div>
-          </div>
-        )}
-        {/* STEP 2: Locations */}
-        {step === 2 && (
-          <div className="space-y-4 sm:space-y-5">
-            <h3 className="text-gray-800 text-base sm:text-lg font-bold mt-0 mb-3">
-              2. Routing Addresses
-            </h3>
-            <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Moving From (Origin Address)
-              </label>
-              <input
-                type="text"
-                name="originAddress"
-                placeholder="Street, City, State, Zip"
-                value={formData.originAddress}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Moving To (Destination Address)
-              </label>
-              <input
-                type="text"
-                name="destinationAddress"
-                placeholder="Street, City, State, Zip"
-                value={formData.destinationAddress}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Special Items or Details (Optional)
-              </label>
-              <textarea
-                name="additionalDetails"
-                rows="3"
-                placeholder="Pianos, heavy safes, strict packing needs, stairs/elevator details..."
-                value={formData.additionalDetails}
-                onChange={handleInputChange}
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow resize-y"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* STEP 3: Contact & Submission */}
-        {step === 3 && (
-          <div className="space-y-4 sm:space-y-5">
-            <h3 className="text-gray-800 text-base sm:text-lg font-bold mt-0 mb-3">
-              3. Your Contact Details
-            </h3>
-            <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Full Name
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                placeholder="John Doe"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Email Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="johndoe@example.com"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2 text-gray-600 text-xs sm:text-sm">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="(404) 555-0199"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] outline-none text-xs sm:text-sm text-gray-700 transition-shadow"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Form Controls / Navigation Panel */}
-        <div
-          className={`flex mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-gray-100 ${step > 1 ? "justify-between" : "justify-end"}`}
-        >
-          {step > 1 && (
             <button
               type="button"
-              onClick={prevStep}
-              className="bg-white text-gray-600 border border-gray-300 hover:bg-gray-50 font-semibold py-2.5 px-5 sm:py-3 sm:px-6 rounded-lg text-xs sm:text-sm transition-colors cursor-pointer"
+              onClick={() => setStep(2)}
+              className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all text-xs uppercase tracking-widest cursor-pointer shadow-md"
             >
-              Back
+              Next Step: Routing Details →
             </button>
-          )}
+          </div>
+        ) : (
+          <div className="space-y-4 text-center py-4">
+            <div className="text-5xl mb-2">📍</div>
+            <h3 className="text-lg font-bold text-slate-800">
+              Ready for Contact & Addresses!
+            </h3>
+            <p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
+              Your choices for a{" "}
+              <span className="font-bold text-blue-600">
+                {bedrooms} Bed {propertyType}
+              </span>{" "}
+              have been dynamically synced to our footer fields below.
+            </p>
 
-          {step < 3 ? (
-            <button
-              type="button"
-              onClick={nextStep}
-              className="bg-[#1e3a8a] text-white hover:bg-blue-900 font-semibold py-2.5 px-5 sm:py-3 sm:px-6 rounded-lg text-xs sm:text-sm transition-colors cursor-pointer"
-            >
-              Continue
-            </button>
-          ) : (
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-[#10b981] text-white hover:bg-emerald-600 font-bold py-2.5 px-6 sm:py-3 sm:px-7 rounded-lg text-xs sm:text-sm transition-all duration-200 cursor-pointer disabled:bg-emerald-400 disabled:cursor-not-allowed shadow-md shadow-emerald-500/20"
-            >
-              {loading ? "Submitting..." : "Get My Free Quote"}
-            </button>
-          )}
-        </div>
-      </form>
+            <div className="pt-4 space-y-3">
+              <button
+                type="button"
+                onClick={handleScrollToFooter}
+                className="w-full bg-[#10b981] hover:bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all text-xs uppercase tracking-widest cursor-pointer shadow-lg"
+              >
+                Let's Finalize My Quote ↓
+              </button>
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="text-xs font-semibold text-slate-400 hover:text-slate-600 transition-colors block mx-auto underline cursor-pointer"
+              >
+                ← Edit Choices
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
