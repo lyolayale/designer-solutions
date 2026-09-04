@@ -89,6 +89,13 @@ export default function Navbar() {
             About
           </a>
           <a
+            href="#pricing"
+            onClick={() => setIsMenuOpen(false)}
+            className="hover:text-blue-400 transition"
+          >
+            Pricing
+          </a>
+          <a
             href="#contact"
             onClick={() => setIsMenuOpen(false)}
             className="bg-blue-400 px-4 py-2 rounded-lg hover:bg-blue-600 transition font-bold"
@@ -120,6 +127,13 @@ export default function Navbar() {
               className="hover:text-blue-400 transition"
             >
               About
+            </a>
+            <a
+              href="#pricing"
+              onClick={() => setIsMenuOpen(false)}
+              className="hover:text-blue-400 transition"
+            >
+              Pricing
             </a>
             <a
               href="#contact"

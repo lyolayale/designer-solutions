@@ -4,6 +4,8 @@ import Services from "./components/Services";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import Reveal from "./components/Reveal";
+import QuoteGenerator from "./components/QuoteGenerator";
+import InteractiveQuoteCalculator from "./components/InteractiveQuoteCalculator";
 
 export const metadata = {
   title: "Movers Buckhead GA | Designer Solutions Moving Company",
@@ -21,6 +23,14 @@ export default function Home() {
       </Reveal>
 
       <Services />
+
+      <Reveal>
+        <QuoteGenerator />
+      </Reveal>
+
+      <Reveal>
+        <InteractiveQuoteCalculator />
+      </Reveal>
 
       <Reveal delay={100}>
         <About />
