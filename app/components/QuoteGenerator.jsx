@@ -9,10 +9,12 @@ export default function QuoteGenerator() {
   const handleStepSelection = type => {
     setPropertyType(type);
 
-    // Broadcast the selection to the browser window immediately
     if (typeof window !== "undefined") {
       const event = new CustomEvent("syncMoveData", {
-        detail: { property_type: type, num_bedrooms: bedrooms },
+        detail: {
+          property_type: type,
+          num_bedrooms: bedrooms,
+        },
       });
       window.dispatchEvent(event);
     }
@@ -22,10 +24,13 @@ export default function QuoteGenerator() {
     const value = e.target.value;
     setBedrooms(value);
 
-    // Broadcast the selection to the browser window immediately
+    // Broadcast the selection with matching variable keys
     if (typeof window !== "undefined") {
       const event = new CustomEvent("syncMoveData", {
-        detail: { property_type: propertyType, num_bedrooms: value },
+        detail: {
+          property_type: propertyType,
+          num_bedrooms: value, // Secure mapping key matching your local contact fields
+        },
       });
       window.dispatchEvent(event);
     }
