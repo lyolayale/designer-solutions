@@ -88,25 +88,28 @@ export default function Footer() {
   return (
     <footer
       id="footer-booking-intake"
-      className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 text-white py-16 pb-8 border-t border-gray-800"
+      className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-white py-16 pb-8 border-t border-gray-800 dark:border-slate-800"
     >
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-[20%] w-full">
         {/* Left Aspect Side Column */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 text-blue-400 tracking-tight">
+          <h2 className="text-3xl font-bold mb-8 text-blue-400 dark:text-blue-300 tracking-tight">
             Ready to Finalize?
           </h2>
-          <p className="mb-4 text-gray-400 leading-relaxed">
+          <p className="mb-4 text-gray-400 dark:text-gray-300 leading-relaxed">
             Complete your routing details below to securely transfer your
             parameters straight to our team.
           </p>
           <a
             href="tel:+14045497025"
-            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:from-blue-400 hover:to-blue-500 transition-all duration-300 mb-12 inline-block shadow-lg shadow-blue-500/30 transform hover:scale-105"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white px-8 py-4 rounded-xl text-lg font-bold hover:from-blue-400 hover:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 transition-all duration-300 mb-12 inline-block shadow-lg shadow-blue-500/30 dark:shadow-blue-600/40 transform hover:scale-105"
           >
             📞 Call (404) 549-7025
           </a>
-          <div id="contact" className="border-t border-gray-700 pt-8 mt-8">
+          <div
+            id="contact"
+            className="border-t border-gray-700 dark:border-slate-700 pt-8 mt-8"
+          >
             <div className="relative inline-block">
               <div className="absolute inset-0 bg-blue-400 rounded-full blur-2xl opacity-20"></div>
               <Image
@@ -119,10 +122,13 @@ export default function Footer() {
               />
             </div>
             <p className="text-xl font-bold mb-2 tracking-tight">
-              <span className="text-blue-400">DSI</span> Moving & Storage
+              <span className="text-blue-400 dark:text-blue-300">DSI</span>{" "}
+              Moving & Storage
             </p>
-            <p className="text-gray-500">2152 Faulkner Rd NE,</p>
-            <p className="text-gray-500">Atlanta GA 30324</p>
+            <p className="text-gray-500 dark:text-gray-400">
+              2152 Faulkner Rd NE,
+            </p>
+            <p className="text-gray-500 dark:text-gray-400">Atlanta GA 30324</p>
           </div>
           <div className="flex gap-5 mt-4 w-1/4">
             {socials.map(social => (
@@ -132,7 +138,7 @@ export default function Footer() {
                 aria-label={social.label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-blue-400 transition-all duration-300 text-2xl transform hover:scale-110"
+                className="text-gray-500 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-300 transition-all duration-300 text-2xl transform hover:scale-110"
               >
                 {social.icon}
               </Link>
@@ -141,13 +147,13 @@ export default function Footer() {
         </div>
 
         {/* Right Aspect Side Column: Linked Intake Form */}
-        <div className="bg-gray-800/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-2xl border border-gray-700 w-100 m-auto">
-          <h3 className="text-xl font-bold mb-5 border-b border-gray-700 pb-2.5 tracking-tight">
+        <div className="bg-gray-800/80 dark:bg-slate-800/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-2xl border border-gray-700 dark:border-slate-600 w-100 m-auto">
+          <h3 className="text-xl font-bold mb-5 border-b border-gray-700 dark:border-slate-600 pb-2.5 tracking-tight">
             📝 Secured Routing Profile
           </h3>
 
           {status === "success" ? (
-            <div className="bg-gradient-to-r from-green-600 to-green-700 p-4 rounded-xl text-center text-sm font-bold shadow-lg">
+            <div className="bg-gradient-to-r from-green-600 to-green-700 dark:from-green-700 dark:to-green-800 p-4 rounded-xl text-center text-sm font-bold shadow-lg">
               Thank you! Your integrated itinerary route values have been
               received.
             </div>
@@ -155,7 +161,7 @@ export default function Footer() {
             <form onSubmit={handleFinalBookingSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs mb-1 text-gray-300 font-medium">
+                  <label className="block text-xs mb-1 text-gray-300 dark:text-gray-400 font-medium">
                     Full Name
                   </label>
                   <input
@@ -164,11 +170,11 @@ export default function Footer() {
                     required
                     value={localContact.name}
                     onChange={handleLocalChange}
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-gray-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-gray-600 dark:border-slate-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-1 text-gray-300 font-medium">
+                  <label className="block text-xs mb-1 text-gray-300 dark:text-gray-400 font-medium">
                     Email Address
                   </label>
                   <input
@@ -177,14 +183,14 @@ export default function Footer() {
                     required
                     value={localContact.email}
                     onChange={handleLocalChange}
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-gray-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-gray-600 dark:border-slate-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs mb-1 text-gray-300 font-medium">
+                  <label className="block text-xs mb-1 text-gray-300 dark:text-gray-400 font-medium">
                     Phone
                   </label>
                   <input
@@ -193,11 +199,11 @@ export default function Footer() {
                     required
                     value={localContact.phone}
                     onChange={handleLocalChange}
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-gray-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-gray-600 dark:border-slate-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-1 text-gray-300 font-medium">
+                  <label className="block text-xs mb-1 text-gray-300 dark:text-gray-400 font-medium">
                     Moving Date
                   </label>
                   <input
@@ -205,14 +211,14 @@ export default function Footer() {
                     name="move_date"
                     value={localContact.move_date}
                     onChange={handleLocalChange}
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-gray-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-gray-600 dark:border-slate-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs mb-1 text-gray-300 font-medium">
+                  <label className="block text-xs mb-1 text-gray-300 dark:text-gray-400 font-medium">
                     Origin Street
                   </label>
                   <input
@@ -221,11 +227,11 @@ export default function Footer() {
                     value={localContact.orgin_address}
                     onChange={handleLocalChange}
                     placeholder="From Address"
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-gray-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-gray-600 dark:border-slate-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-1 text-gray-300 font-medium">
+                  <label className="block text-xs mb-1 text-gray-300 dark:text-gray-400 font-medium">
                     Destination Street
                   </label>
                   <input
@@ -234,21 +240,21 @@ export default function Footer() {
                     value={localContact.destination_address}
                     onChange={handleLocalChange}
                     placeholder="To Address"
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-gray-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-gray-600 dark:border-slate-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-300"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs mb-1 text-blue-400 font-semibold">
+                  <label className="block text-xs mb-1 text-blue-400 dark:text-blue-300 font-semibold">
                     Active Property (Linked)
                   </label>
                   <select
                     name="property_type"
                     value={localContact.property_type}
                     onChange={handleLocalChange}
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-blue-500/40 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none cursor-pointer transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-blue-500/40 dark:border-blue-400/40 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none cursor-pointer transition-all duration-300"
                   >
                     {[
                       "House",
@@ -265,14 +271,14 @@ export default function Footer() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs mb-1 text-blue-400 font-semibold">
+                  <label className="block text-xs mb-1 text-blue-400 dark:text-blue-300 font-semibold">
                     Bedrooms (Linked)
                   </label>
                   <select
                     name="num_bedrooms"
                     value={localContact.num_bedrooms}
                     onChange={handleLocalChange}
-                    className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-blue-500/40 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none cursor-pointer transition-all duration-300"
+                    className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-blue-500/40 dark:border-blue-400/40 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none cursor-pointer transition-all duration-300"
                   >
                     <option value="1">1 Bedroom / Studio</option>
                     <option value="2">2 Bedrooms</option>
@@ -283,7 +289,7 @@ export default function Footer() {
               </div>
 
               <div>
-                <label className="block text-xs mb-1 text-gray-300 font-medium">
+                <label className="block text-xs mb-1 text-gray-300 dark:text-gray-400 font-medium">
                   Special Items or Details (Optional)
                 </label>
                 <textarea
@@ -291,7 +297,7 @@ export default function Footer() {
                   rows="2"
                   value={localContact.details}
                   onChange={handleLocalChange}
-                  className="w-full p-2.5 rounded-lg bg-gray-700/80 text-white border border-gray-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none resize-none transition-all duration-300"
+                  className="w-full p-2.5 rounded-lg bg-gray-700/80 dark:bg-slate-700/80 text-white border border-gray-600 dark:border-slate-600 text-xs focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none resize-none transition-all duration-300"
                   placeholder="Pianos, stairs..."
                 ></textarea>
               </div>
@@ -299,19 +305,25 @@ export default function Footer() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3.5 rounded-xl font-bold hover:from-blue-400 hover:to-blue-500 transition-all duration-300 disabled:opacity-50 text-xs cursor-pointer shadow-lg shadow-blue-500/30 transform hover:scale-[1.02]"
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white font-bold py-3 rounded-xl hover:from-blue-400 hover:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/30 dark:shadow-blue-600/40 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                {status === "loading"
-                  ? "Submitting Request..."
-                  : "Finalize Free Moving Quote"}
+                {status === "loading" ? "Processing..." : "Submit Request"}
               </button>
             </form>
           )}
         </div>
       </div>
-      <small className="block text-center mt-20 text-gray-600">
-        &copy; Copyright {new Date().getFullYear()} | DSI Moving & Storage
-      </small>
+
+      {/* Bottom Copyright Bar */}
+      <div className="text-center text-gray-500 dark:text-gray-400 text-sm mt-16 pt-8 border-t border-gray-800 dark:border-slate-700">
+        <p className="mb-2">
+          &copy; {new Date().getFullYear()} Designer Solutions, LLC. All rights
+          reserved.
+        </p>
+        <p className="text-xs">
+          Licensed and Insured | Serving Buckhead, GA and Atlanta Metro Area
+        </p>
+      </div>
     </footer>
   );
 }

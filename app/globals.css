@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --color-dark-bg: #0f172a;
+  --color-dark-card: #1e293b;
+  --color-dark-text: #f1f5f9;
+  --color-dark-border: #334155;
+}
+
 html.lenis,
 html.lenis body {
   height: auto;
@@ -19,4 +26,225 @@ html.lenis body {
 
 .lenis.lenis-smooth iframe {
   pointer-events: none;
+}
+
+/* Dark mode overrides using CSS - Higher specificity */
+html.dark,
+html.dark body {
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark .bg-white {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-slate-50 {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-slate-100 {
+  background-color: #334155 !important;
+}
+
+html.dark .bg-slate-200 {
+  background-color: #475569 !important;
+}
+
+html.dark .bg-slate-800 {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-slate-900 {
+  background-color: #0f172a !important;
+}
+
+html.dark .bg-slate-950 {
+  background-color: #020617 !important;
+}
+
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-slate-600,
+html.dark .text-slate-500,
+html.dark .text-slate-400 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: #334155 !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-300,
+html.dark .border-slate-600,
+html.dark .border-slate-700 {
+  border-color: #334155 !important;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+html.dark button {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-gray-300,
+html.dark .text-gray-400 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-gray-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-gray-800 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-blue-900 {
+  color: #60a5fa !important;
+}
+
+html.dark .text-blue-300 {
+  color: #93c5fd !important;
+}
+
+html.dark .text-blue-400 {
+  color: #60a5fa !important;
+}
+
+html.dark .from-blue-900 {
+  background-color: #1e3a8a !important;
+}
+
+html.dark .to-blue-800 {
+  background-color: #1e40af !important;
+}
+
+html.dark .from-blue-600 {
+  background-color: #2563eb !important;
+}
+
+html.dark .to-blue-700 {
+  background-color: #1d4ed8 !important;
+}
+
+html.dark .from-blue-500 {
+  background-color: #3b82f6 !important;
+}
+
+html.dark .to-blue-600 {
+  background-color: #2563eb !important;
+}
+
+html.dark .from-blue-700 {
+  background-color: #1d4ed8 !important;
+}
+
+html.dark .to-blue-800 {
+  background-color: #1e40af !important;
+}
+
+html.dark .from-blue-950 {
+  background-color: #0c4a6e !important;
+}
+
+html.dark .to-blue-900 {
+  background-color: #1e3a8a !important;
+}
+
+html.dark .via-blue-800 {
+  background-color: #1e40af !important;
+}
+
+html.dark .via-blue-900 {
+  background-color: #1e3a8a !important;
+}
+
+/* Fix gradient text in dark mode */
+html.dark .text-transparent.bg-clip-text {
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+
+html.dark .bg-gradient-to-r.from-blue-400.to-blue-300 {
+  background-image: linear-gradient(to right, #60a5fa, #93c5fd) !important;
+}
+
+html.dark .bg-gradient-to-r.from-blue-300.to-blue-200 {
+  background-image: linear-gradient(to right, #93c5fd, #bfdbfe) !important;
+}
+
+/* Force gradient backgrounds in dark mode */
+html.dark .bg-gradient-to-b {
+  background: linear-gradient(to bottom, #1e293b, #0f172a) !important;
+}
+
+html.dark .bg-gradient-to-br {
+  background: linear-gradient(to bottom right, #1e293b, #0f172a) !important;
+}
+
+html.dark .bg-gradient-to-t {
+  background: linear-gradient(to top, #1e293b, #0f172a) !important;
+}
+
+html.dark .bg-gradient-to-r {
+  background-image: linear-gradient(to right, #1e3a8a, #1e40af) !important;
+}
+
+/* Force all gradient backgrounds to use dark colors */
+html.dark section[class*="bg-gradient"] {
+  background: linear-gradient(to bottom, #1e293b, #0f172a) !important;
+}
+
+html.dark div[class*="bg-gradient"] {
+  background: linear-gradient(to bottom, #1e293b, #0f172a) !important;
+}
+
+html.dark .from-gray-50 {
+  background-color: #1e293b !important;
+}
+
+html.dark .to-gray-100 {
+  background-color: #0f172a !important;
+}
+
+/* Hero section specific overrides */
+html.dark .from-black\/60 {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+html.dark .via-black\/50 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+html.dark .to-black\/70 {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Fix for Services section image hover overlay in dark mode */
+html.dark .bg-gradient-to-t.from-black\/50 {
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.3),
+    transparent
+  ) !important;
+}
+
+html.dark .bg-gradient-to-t.from-black\/30 {
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.2),
+    transparent
+  ) !important;
 }

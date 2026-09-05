@@ -8,7 +8,7 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
   const isOpen = openCard === index;
 
   return (
-    <div className="w-full h-auto bg-white rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+    <div className="w-full h-auto bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl hover:shadow-blue-900/10 dark:hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-slate-700">
       {/* Image */}
       <Reveal delay={100}>
         <div className="relative w-full h-52 shrink-0 overflow-hidden group">
@@ -19,7 +19,7 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
             className="object-cover transition-transform duration-500 group-hover:scale-110"
             sizes="(max-width: 768px), 100vw, 33vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 dark:from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
       </Reveal>
 
@@ -27,14 +27,14 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
       <div className="p-6 flex flex-col grow">
         {/* FIXED TITLE CONTAINER: Standardizes height regardless of 1-line or 2-line text */}
         <div className="h-16 flex items-center justify-center text-center mb-3">
-          <h3 className="text-xl font-bold text-blue-900 line-clamp-2 tracking-tight">
+          <h3 className="text-xl font-bold text-blue-900 dark:text-blue-300 line-clamp-2 tracking-tight">
             {service.title}
           </h3>
         </div>
 
         {/* FIXED DESCRIPTION CONTAINER: Aligns the top boundaries of the description blocks */}
         <div className="h-20 flex flex-col justify-start text-center mb-6">
-          <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
             {service.description}
           </p>
         </div>
@@ -44,7 +44,7 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
           <button
             type="button"
             onClick={() => toggleCard(index)}
-            className="w-full flex items-center justify-center gap-2 text-blue-900 font-semibold hover:text-blue-700 transition-colors cursor-pointer group"
+            className="w-full flex items-center justify-center gap-2 text-blue-900 dark:text-blue-300 font-semibold hover:text-blue-700 dark:hover:text-blue-200 transition-colors cursor-pointer group"
           >
             <span className="group-hover:translate-x-1 transition-transform duration-200">
               {isOpen ? "Hide Details" : `Learn More`}
@@ -61,12 +61,12 @@ function ServiceCard({ service, index, openCard, toggleCard }) {
 
         {/* Details Dropdown */}
         {isOpen && (
-          <div className="mt-6 pt-6 border-t border-gray-200 text-left animate-in slide-in-from-top-2 duration-300">
-            <ul className="list-disc list-inside space-y-2 text-gray-600 text-sm">
+          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-600 text-left animate-in slide-in-from-top-2 duration-300">
+            <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 text-sm">
               {service.details.map(detail => (
                 <li
                   key={detail}
-                  className="hover:text-blue-900 transition-colors duration-200"
+                  className="hover:text-blue-900 dark:hover:text-blue-300 transition-colors duration-200"
                 >
                   {detail}
                 </li>
@@ -176,10 +176,10 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-20 bg-gradient-to-b from-gray-50 to-gray-100"
+      className="py-20 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-slate-900 dark:to-slate-800"
     >
       <div className="container mx-auto px-4">
-        <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 flex flex-col gap-10 justify-center items-center p-8 rounded-3xl mt-10 mb-20 shadow-2xl shadow-blue-900/20 border border-blue-700/30">
+        <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 dark:from-blue-950 dark:via-blue-900 dark:to-blue-950 flex flex-col gap-10 justify-center items-center p-8 rounded-3xl mt-10 mb-20 shadow-2xl shadow-blue-900/20 dark:shadow-blue-500/30 border border-blue-700/30 dark:border-blue-800/50">
           {/* Container explicitly forced to your exact image dimensions */}
 
           <div className="relative w-75 h-50 rounded-[10%] overflow-hidden group">
