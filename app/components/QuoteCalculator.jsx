@@ -94,7 +94,10 @@ export default function QuoteCalculator() {
   };
 
   return (
-    <div className="mx-auto bg-white text-slate-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 font-sans">
+    <div
+      id="estimate"
+      className="mx-auto bg-white text-slate-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 font-sans"
+    >
       {/* Header Panel */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-6 px-6 text-white text-center">
         <h2 className="m-0 text-xl font-bold tracking-wide">
