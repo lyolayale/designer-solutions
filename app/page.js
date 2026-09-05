@@ -24,13 +24,15 @@ export default function Home() {
 
       <Services />
 
-      <Reveal>
-        <QuoteGenerator />
-      </Reveal>
+      <section className="flex md:flex-row flex-col justify-around my-20 gap-5 md:max-w-[80%] max-w-full mx-auto">
+        <Reveal>
+          <QuoteGenerator />
+        </Reveal>
 
-      <Reveal>
-        <InteractiveQuoteCalculator />
-      </Reveal>
+        <Reveal>
+          <InteractiveQuoteCalculator />
+        </Reveal>
+      </section>
 
       <Reveal delay={100}>
         <About />
