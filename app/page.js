@@ -4,8 +4,7 @@ import Services from "./components/Services";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import Reveal from "./components/Reveal";
-import QuoteGenerator from "./components/QuoteGenerator";
-import InteractiveQuoteCalculator from "./components/InteractiveQuoteCalculator";
+import QuoteCalculator from "./components/QuoteCalculator";
 
 export const metadata = {
   title: "Movers Buckhead GA | Designer Solutions Moving Company",
@@ -24,13 +23,9 @@ export default function Home() {
 
       <Services />
 
-      <section className="flex md:flex-row flex-col justify-around my-20 gap-5 md:max-w-[80%] max-w-full mx-auto">
+      <section className="w-[80%] mx-auto mb-10">
         <Reveal>
-          <QuoteGenerator />
-        </Reveal>
-
-        <Reveal>
-          <InteractiveQuoteCalculator />
+          <QuoteCalculator />
         </Reveal>
       </section>
 

@@ -27,7 +27,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-50 text-gray-800`}>
+      <body
+        className={`${inter.className} bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 antialiased`}
+      >
         <LocalSchema />
         <SmoothScroll>{children}</SmoothScroll>
       </body>

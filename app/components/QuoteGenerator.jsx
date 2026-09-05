@@ -1,10 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function QuoteGenerator() {
   const [step, setStep] = useState(1);
   const [propertyType, setPropertyType] = useState("Apartment");
   const [bedrooms, setBedrooms] = useState("1");
+
+  // Listen for sync events from InteractiveQuoteCalculator
+  useEffect(() => {
+    const handleSync = e => {
+      if (e.detail) {
+        setPropertyType(e.detail.property_type || propertyType);
+        setBedrooms(e.detail.num_bedrooms || bedrooms);
+      }
+    };
+
+    window.addEventListener("syncMoveData", handleSync);
+    return () => window.removeEventListener("syncMoveData", handleSync);
+  }, [propertyType, bedrooms]);
 
   const handleStepSelection = type => {
     setPropertyType(type);
@@ -44,9 +57,9 @@ export default function QuoteGenerator() {
   };
 
   return (
-    <div className="mx-auto max-w-[550px] w-11/12 bg-white text-slate-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 font-sans">
+    <div className="mx-auto max-w-[550px] w-11/12 bg-white text-slate-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 font-sans">
       {/* Header Panel */}
-      <div className="bg-[#1e3a8a] py-6 px-6 text-white text-center">
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-6 px-6 text-white text-center">
         <h2 className="m-0 text-xl font-bold tracking-wide">
           Moving Request Setup
         </h2>
@@ -77,10 +90,10 @@ export default function QuoteGenerator() {
                     key={type}
                     type="button"
                     onClick={() => handleStepSelection(type)}
-                    className={`py-3 px-1 rounded-xl text-xs font-bold transition-all border cursor-pointer text-center block w-full ${
+                    className={`py-3 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer text-center block w-full ${
                       propertyType === type
-                        ? "bg-blue-600 border-blue-600 text-white shadow-md"
-                        : "bg-slate-50 border-gray-200 text-slate-600 hover:bg-slate-100"
+                        ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/30 transform scale-105"
+                        : "bg-slate-50 border border-gray-200 text-slate-600 hover:bg-slate-100 hover:border-blue-300"
                     }`}
                   >
                     {type === "House"
@@ -101,7 +114,7 @@ export default function QuoteGenerator() {
               <select
                 value={bedrooms}
                 onChange={handleBedroomSelection}
-                className="w-full p-3 rounded-xl border border-gray-300 bg-white text-sm outline-none focus:border-blue-600 text-slate-700 cursor-pointer"
+                className="w-full p-3 rounded-xl border border-gray-300 bg-white text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-400/20 text-slate-700 cursor-pointer transition-all duration-300"
               >
                 <option value="1">1 Bedroom / Studio Apt</option>
                 <option value="2">2 Bedroom Space</option>
@@ -113,7 +126,7 @@ export default function QuoteGenerator() {
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all text-xs uppercase tracking-widest cursor-pointer shadow-md"
+              className="w-full mt-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all text-xs uppercase tracking-widest cursor-pointer shadow-lg shadow-blue-500/30 transform hover:scale-[1.02]"
             >
               Next Step: Routing Details →
             </button>
@@ -136,9 +149,9 @@ export default function QuoteGenerator() {
               <button
                 type="button"
                 onClick={handleScrollToFooter}
-                className="w-full bg-[#10b981] hover:bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all text-xs uppercase tracking-widest cursor-pointer shadow-lg"
+                className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-bold py-3.5 px-6 rounded-xl transition-all text-xs uppercase tracking-widest cursor-pointer shadow-lg shadow-emerald-500/30 transform hover:scale-[1.02]"
               >
-                Let's Finalize My Quote ↓
+                Let&apos;s Finalize My Quote ↓
               </button>
               <button
                 type="button"

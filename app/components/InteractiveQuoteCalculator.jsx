@@ -1,18 +1,56 @@
 "use client";
 import { section } from "framer-motion/client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function InteractiveQuoteCalculator() {
-  // Interactive Controls State
-  const [homeSize, setHomeSize] = useState("1 Bed Apt");
+  // Interactive Controls State - aligned with QuoteGenerator
+  const [propertyType, setPropertyType] = useState("Apartment");
+  const [bedrooms, setBedrooms] = useState("1");
   const [distance, setDistance] = useState(79);
   const [packingOption, setPackingOption] = useState("Standard Assist");
 
-  // Dynamic Rate Calculation Configurations
+  // Listen for sync events from QuoteGenerator
+  useEffect(() => {
+    const handleSync = e => {
+      if (e.detail) {
+        setPropertyType(e.detail.property_type || propertyType);
+        setBedrooms(e.detail.num_bedrooms || bedrooms);
+      }
+    };
+
+    window.addEventListener("syncMoveData", handleSync);
+    return () => window.removeEventListener("syncMoveData", handleSync);
+  }, [propertyType, bedrooms]);
+
+  // Broadcast changes to QuoteGenerator
+  const broadcastData = () => {
+    if (typeof window !== "undefined") {
+      const event = new CustomEvent("syncMoveData", {
+        detail: {
+          property_type: propertyType,
+          num_bedrooms: bedrooms,
+        },
+      });
+      window.dispatchEvent(event);
+    }
+  };
+
+  const handlePropertyTypeChange = type => {
+    setPropertyType(type);
+    broadcastData();
+  };
+
+  const handleBedroomsChange = value => {
+    setBedrooms(value);
+    broadcastData();
+  };
+
+  // Dynamic Rate Calculation Configurations - mapped to aligned data
   const baseRates = {
-    "1 Bed Apt": 280,
-    "2 Bed Home": 450,
-    "3+ Bed House": 650,
+    1: 280,
+    2: 450,
+    3: 650,
+    "4+": 850,
   };
 
   const packingFees = {
@@ -22,7 +60,7 @@ export default function InteractiveQuoteCalculator() {
   };
 
   // Live Math Computations
-  const currentBaseRate = baseRates[homeSize];
+  const currentBaseRate = baseRates[bedrooms] || baseRates["1"];
   const currentPackingFee = packingFees[packingOption];
   const currentDistanceFee = parseFloat((distance * 3.5).toFixed(1)); // $3.50 per mile
   const totalEstimate = Math.round(
@@ -40,12 +78,12 @@ export default function InteractiveQuoteCalculator() {
       id="estimate"
       className="max-w-[550px] w-11/12 mx-auto md:my-0 my-30 text-slate-800 rounded-2xl overflow-hidden font-sans"
     >
-      <div className="bg-[#1e3a8a] py-6 px-6 text-white text-center">
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-6 px-6 text-white text-center">
         <h2 className="m-0 text-xl font-bold tracking-wide">Price Estimator</h2>
       </div>
-      <div className="mx-auto my-10 max-w-full bg-white rounded-2xl overflow-hidden font-sans border border-gray-100 shadow-[3px_5px_10px_lightgray]">
+      <div className="mx-auto my-10 max-w-full bg-white rounded-2xl overflow-hidden font-sans border border-gray-100 shadow-lg">
         {/* 1. MOBILE-FRIENDLY VISUAL ANIMATION OVERVIEW PANEL */}
-        <div className="bg-slate-50 py-7 px-4 sm:px-6 border-b border-slate-200 relative overflow-hidden h-[150px] select-none">
+        <div className="bg-gradient-to-b from-slate-50 to-white py-7 px-4 sm:px-6 border-b border-slate-200 relative overflow-hidden h-[150px] select-none">
           {/* Background Skyline Silhouettes */}
           <div className="absolute bottom-0 left-[35%] flex gap-1.5 items-end opacity-[0.05] pointer-events-none">
             <div className="w-8 h-[100px] bg-black" />
@@ -121,7 +159,7 @@ export default function InteractiveQuoteCalculator() {
               ${currentPackingFee}
             </div>
           </div>
-          <div className="py-2 sm:py-0 bg-blue-50/50 sm:bg-transparent">
+          <div className="py-2 sm:py-0 bg-gradient-to-b from-blue-50/50 to-transparent sm:bg-transparent">
             <div className="text-[11px] sm:text-xs text-slate-600 mb-0.5 font-semibold">
               Total Estimate
             </div>
@@ -133,27 +171,49 @@ export default function InteractiveQuoteCalculator() {
 
         {/* 3. INTERACTIVE CONTROL INTERFACE */}
         <div className="py-6 px-4 sm:px-6 space-y-6">
-          {/* Control Row A: Home Size Cards */}
+          {/* Control Row A: Property Type Cards */}
           <div>
             <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">
-              Home Size / Inventory Volume
+              Property Type
             </label>
-            <div className="flex bg-slate-100 p-1 rounded-xl gap-1">
-              {["1 Bed Apt", "2 Bed Home", "3+ Bed House"].map(size => (
+            <div className="grid grid-cols-3 gap-2">
+              {["House", "Apartment", "Condo"].map(type => (
                 <button
-                  key={size}
+                  key={type}
                   type="button"
-                  onClick={() => setHomeSize(size)}
-                  className={`flex-1 py-2 sm:py-2.5 rounded-lg text-[11px] sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                    homeSize === size
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "bg-transparent text-slate-500 hover:text-slate-700"
+                  onClick={() => handlePropertyTypeChange(type)}
+                  className={`py-3 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer text-center block w-full ${
+                    propertyType === type
+                      ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/30 transform scale-105"
+                      : "bg-slate-50 border border-gray-200 text-slate-600 hover:bg-slate-100 hover:border-blue-300"
                   }`}
                 >
-                  {size}
+                  {type === "House"
+                    ? "🏡 "
+                    : type === "Apartment"
+                      ? "🏢 "
+                      : "🏙️ "}
+                  <span className="block mt-1">{type}</span>
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Control Row B: Bedroom Count */}
+          <div>
+            <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">
+              Bedroom Count
+            </label>
+            <select
+              value={bedrooms}
+              onChange={e => handleBedroomsChange(e.target.value)}
+              className="w-full p-3 rounded-xl border border-gray-300 bg-white text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-400/20 text-slate-700 cursor-pointer transition-all duration-300"
+            >
+              <option value="1">1 Bedroom / Studio Apt</option>
+              <option value="2">2 Bedroom Space</option>
+              <option value="3">3 Bedroom Household</option>
+              <option value="4+">4+ Bedrooms Multi-Crew</option>
+            </select>
           </div>
 
           {/* Control Row B: Range Slider */}
@@ -173,7 +233,7 @@ export default function InteractiveQuoteCalculator() {
                 max="150"
                 value={distance}
                 onChange={e => setDistance(parseInt(e.target.value))}
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none focus:ring-2 focus:ring-blue-400/20"
               />
             </div>
           </div>
@@ -192,8 +252,8 @@ export default function InteractiveQuoteCalculator() {
                     onClick={() => setPackingOption(option)}
                     className={`flex-1 py-2 sm:py-2.5 rounded-lg text-[11px] sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                       packingOption === option
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "bg-transparent text-slate-500 hover:text-slate-700"
+                        ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/30 transform scale-105"
+                        : "bg-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
                     }`}
                   >
                     {option}
