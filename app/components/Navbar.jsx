@@ -1,15 +1,46 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
 import { BUSINESS } from "../../lib/business";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme, mounted } = useTheme();
+  const navRef = useRef(null);
+
+  // Close the mobile menu when clicking outside of it or pressing Escape
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleOutsideClick = event => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    const handleEscapeKey = event => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+    document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isMenuOpen]);
 
   return (
-    <nav className="bg-gradient-to-r from-blue-950/95 via-blue-900/95 to-blue-950/95 text-white shadow-lg shadow-blue-950/20 sticky top-0 z-50 py-3 backdrop-blur-xl border-b border-white/10 pl-5">
+    <nav
+      ref={navRef}
+      className="bg-gradient-to-r from-blue-950/95 via-blue-900/95 to-blue-950/95 text-white shadow-lg shadow-blue-950/20 sticky top-0 z-50 py-3 backdrop-blur-xl border-b border-white/10 pl-5"
+    >
       {/* Changed flex-row to flex-col on mobile to stack the menu nicely under the top bar */}
       <section className="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center">
         {/* Top Bar Wrapper */}
