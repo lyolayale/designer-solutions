@@ -179,28 +179,18 @@ export default function Services() {
       className="py-20 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-slate-900 dark:to-slate-800"
     >
       <div className="container mx-auto px-4">
-        <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 dark:from-blue-950 dark:via-blue-900 dark:to-blue-950 flex flex-col gap-10 justify-center items-center p-8 rounded-3xl mt-10 mb-20 shadow-2xl shadow-blue-900/20 dark:shadow-blue-500/30 border border-blue-700/30 dark:border-blue-800/50">
-          {/* Container explicitly forced to your exact image dimensions */}
-
-          <div className="relative w-75 h-50 rounded-[10%] overflow-hidden group">
-            <div className="absolute inset-0 bg-blue-400 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-            <Image
-              src="/large-logo.avif"
-              alt="Designer Solutions moving truck in Tucker GA"
-              width={200}
-              height={200}
-              priority
-              className="object-cover w-full h-full brightness-125 relative z-10 transition-transform duration-500 group-hover:scale-105"
-            />
-
-            {/* Always-visible absolute overlay */}
-            <div className="absolute inset-0 bg-black/20 flex justify-center items-center"></div>
-          </div>
-
-          <h2 className="text-3xl font-bold text-center text-white tracking-tight">
-            DSI Moving & Storage
+        <div className="text-center max-w-2xl mx-auto mb-14 mt-10">
+          <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm uppercase tracking-widest">
+            Our Services
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mt-3 tracking-tight">
+            Moving & Storage, Tailored to You
           </h2>
-        </section>
+          <p className="text-gray-600 dark:text-gray-300 mt-4 leading-relaxed">
+            From studio apartments to corporate offices — every move gets the
+            same white-glove attention from our veteran crew.
+          </p>
+        </div>
 
         {/* ============================= */}
         {/* SEPARATED COLUMNS LAYOUT */}

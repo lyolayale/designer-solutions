@@ -3,23 +3,24 @@ import { Inter } from "next/font/google";
 import LocalSchema from "./components/LocalSchema";
 import SmoothScroll from "./components/SmoothScroll";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { BUSINESS } from "../lib/business";
+import { absoluteUrl } from "../lib/seo";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Designer Solutions | Premier Movers in Buckhead, GA",
-  description:
-    "Designer Solutions has been providing reliable, professional moving services in Buckhead, GA and the Atlanta metro area for 26 years. Get a free quote today!",
-  keywords: [
-    "Movers Buckhead GA",
-    "Atlanta Moving Company",
-    "Local Movers",
-    "Designer Solutions",
-  ],
+  metadataBase: new URL(BUSINESS.siteUrl),
+  title: {
+    default: `Designer Solutions | Premier Movers in ${BUSINESS.primaryServiceArea}, GA`,
+    template: `%s | ${BUSINESS.legalName}`,
+  },
+  description: `${BUSINESS.legalName} has been providing reliable, professional moving services in ${BUSINESS.primaryServiceArea}, GA and the Atlanta metro area for ${BUSINESS.yearsInBusiness} years. Get a free quote today!`,
   openGraph: {
-    title: "Designer Solutions | Premier Movers in Buckhead, GA",
-    description: "26 years of expert moving services in Tukcer, GA",
+    title: `Designer Solutions | Premier Movers in ${BUSINESS.primaryServiceArea}, GA`,
+    description: `${BUSINESS.yearsInBusiness} years of expert moving services in ${BUSINESS.primaryServiceArea}, GA and the Atlanta metro area.`,
     type: "website",
+    url: absoluteUrl("/"),
+    siteName: BUSINESS.legalName,
   },
 };
 

@@ -1,26 +1,29 @@
-// app/components/LocalSchema.jsx
+import { BUSINESS } from "../../lib/business";
+import { SERVICE_CITIES } from "../../lib/cities";
 
 export default function LocalSchema() {
+  const areaServed = [
+    { "@type": "City", name: BUSINESS.primaryServiceArea },
+    ...SERVICE_CITIES.map(({ name }) => ({ "@type": "City", name })),
+  ];
+
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "MovingCompany",
-    name: "DSi Moving and Storage", // Ask owner for real name
-    image: "https://yourmovingcompany.com/image.png",
-    telephone: "+1-404-549-7025", // Ask owner for real phone number
-    url: "https://yourmovingcompany.com", // Ask owner for real site link
+    name: BUSINESS.brandName,
+    alternateName: BUSINESS.legalName,
+    image: `${BUSINESS.siteUrl}/image.png`,
+    telephone: BUSINESS.phone,
+    url: BUSINESS.siteUrl,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "2084 Faulkner Rd NE", // Ask owner for real address
-      addressLocality: "Atlanta",
-      addressRegion: "GA",
-      postalCode: "30324",
-      addressCountry: "US",
+      streetAddress: BUSINESS.address.street,
+      addressLocality: BUSINESS.address.city,
+      addressRegion: BUSINESS.address.region,
+      postalCode: BUSINESS.address.postalCode,
+      addressCountry: BUSINESS.address.country,
     },
-    areaServed: [
-      { "@type": "City", name: "Atlanta" },
-      { "@type": "City", name: "Buckhead" },
-      { "@type": "City", name: "Decatur" },
-    ],
+    areaServed,
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: [
@@ -34,7 +37,7 @@ export default function LocalSchema() {
       opens: "08:00",
       closes: "18:00",
     },
-    foundingDate: "2000",
+    foundingDate: String(BUSINESS.foundingYear),
     priceRange: "$$",
   };
 

@@ -8,9 +8,16 @@ export function ThemeProvider({ children }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
+
+    // Defer state updates to a microtask so we don't call setState
+    // synchronously inside the effect body (react-hooks/set-state-in-effect)
+    const initialize = async () => {
+      await Promise.resolve();
+      setTheme(savedTheme);
+      setMounted(true);
+    };
+    initialize();
   }, []);
 
   useEffect(() => {

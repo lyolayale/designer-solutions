@@ -2,13 +2,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
+import { BUSINESS } from "../../lib/business";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme, mounted } = useTheme();
 
   return (
-    <nav className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white shadow-xl sticky top-0 z-50 p-5 backdrop-blur-xl bg-opacity-95">
+    <nav className="bg-gradient-to-r from-blue-950/95 via-blue-900/95 to-blue-950/95 text-white shadow-lg shadow-blue-950/20 sticky top-0 z-50 py-3 backdrop-blur-xl border-b border-white/10">
       {/* Changed flex-row to flex-col on mobile to stack the menu nicely under the top bar */}
       <section className="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center">
         {/* Top Bar Wrapper */}
@@ -19,7 +20,7 @@ export default function Navbar() {
               <div className="absolute inset-0 bg-blue-400 rounded-full blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
               <Image
                 src="/mini-logo.avif"
-                alt="Designer Solutions movers loading a truck in Tucker GA"
+                alt={BUSINESS.imageAlt}
                 className="object-contain rounded brightness-125 relative z-10 transition-transform duration-300 group-hover:scale-110"
                 priority
                 width={50}
@@ -28,10 +29,10 @@ export default function Navbar() {
             </a>
             <a href="#" className="group">
               <h2 className="text-xl md:text-2xl font-bold text-blue-400 group-hover:text-blue-300 transition-colors duration-300 tracking-tight">
-                Designer Solutions, LLC
+                {BUSINESS.legalName}
               </h2>
               <p className="text-sm text-gray-300 group-hover:text-white transition-colors duration-300 font-medium">
-                DSI Moving & Storage
+                {BUSINESS.brandName}
               </p>
             </a>
           </div>
@@ -136,6 +137,25 @@ export default function Navbar() {
               )}
             </button>
           )}
+          <a
+            href={`tel:${BUSINESS.phone}`}
+            className="hidden lg:flex items-center gap-2 text-sm font-semibold text-blue-200 hover:text-white transition-colors duration-300"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+              />
+            </svg>
+            {BUSINESS.phoneDisplay}
+          </a>
           <a
             href="#contact"
             onClick={() => setIsMenuOpen(false)}

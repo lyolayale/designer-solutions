@@ -383,7 +383,7 @@ export default function QuoteCalculator() {
                 onClick={handleScrollToFooter}
                 className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-bold py-3.5 px-6 rounded-xl transition-all text-xs uppercase tracking-widest cursor-pointer shadow-lg shadow-emerald-500/30 transform hover:scale-[1.02]"
               >
-                Let&apos;s Finalize My Quote ↓
+                Get My Free Quote ↓
               </button>
               <button
                 type="button"

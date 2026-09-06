@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
+import { BUSINESS, formattedAddress } from "../../lib/business";
 
 export default function Footer() {
   const [status, setStatus] = useState("idle");
@@ -39,17 +40,22 @@ export default function Footer() {
     {
       id: 1,
       icon: <FaFacebook />,
-      url: "https://facebook.com",
+      url: BUSINESS.social.facebook,
       label: "Facebook",
     },
-    { id: 2, icon: <FaTiktok />, url: "https://tiktok.com", label: "TikTok" },
+    {
+      id: 2,
+      icon: <FaTiktok />,
+      url: BUSINESS.social.tiktok,
+      label: "TikTok",
+    },
     {
       id: 3,
       icon: <FaInstagram />,
-      url: "https://instagram.com",
+      url: BUSINESS.social.instagram,
       label: "Instagram",
     },
-  ];
+  ].filter(social => social.url);
 
   const handleLocalChange = e =>
     setLocalContact({ ...localContact, [e.target.name]: e.target.value });
@@ -94,17 +100,17 @@ export default function Footer() {
         {/* Left Aspect Side Column */}
         <div>
           <h2 className="text-3xl font-bold mb-8 text-blue-400 dark:text-blue-300 tracking-tight">
-            Ready to Finalize?
+            Ready to Book Your Move?
           </h2>
           <p className="mb-4 text-gray-400 dark:text-gray-300 leading-relaxed">
-            Complete your routing details below to securely transfer your
-            parameters straight to our team.
+            Fill in your details below and our team will contact you with a
+            personalized quote — usually within 24 hours.
           </p>
           <a
-            href="tel:+14045497025"
+            href={`tel:${BUSINESS.phone}`}
             className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white px-8 py-4 rounded-xl text-lg font-bold hover:from-blue-400 hover:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 transition-all duration-300 mb-12 inline-block shadow-lg shadow-blue-500/30 dark:shadow-blue-600/40 transform hover:scale-105"
           >
-            📞 Call (404) 549-7025
+            📞 Call {BUSINESS.phoneDisplay}
           </a>
           <div
             id="contact"
@@ -114,7 +120,7 @@ export default function Footer() {
               <div className="absolute inset-0 bg-blue-400 rounded-full blur-2xl opacity-20"></div>
               <Image
                 src="/mini-logo.avif"
-                alt="Movers loading truck in Tucker GA"
+                alt={BUSINESS.imageAlt}
                 width={100}
                 height={100}
                 className="mt-10 rounded mb-5 relative z-10 transition-transform duration-300 hover:scale-110"
@@ -126,9 +132,8 @@ export default function Footer() {
               Moving & Storage
             </p>
             <p className="text-gray-500 dark:text-gray-400">
-              2152 Faulkner Rd NE,
+              {formattedAddress}
             </p>
-            <p className="text-gray-500 dark:text-gray-400">Atlanta GA 30324</p>
           </div>
           <div className="flex gap-5 mt-4 w-1/4">
             {socials.map(social => (
@@ -149,13 +154,13 @@ export default function Footer() {
         {/* Right Aspect Side Column: Linked Intake Form */}
         <div className="bg-gray-800/80 dark:bg-slate-800/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-2xl border border-gray-700 dark:border-slate-600 w-100 m-auto">
           <h3 className="text-xl font-bold mb-5 border-b border-gray-700 dark:border-slate-600 pb-2.5 tracking-tight">
-            📝 Secured Routing Profile
+            Request Your Free Quote
           </h3>
 
           {status === "success" ? (
             <div className="bg-gradient-to-r from-green-600 to-green-700 dark:from-green-700 dark:to-green-800 p-4 rounded-xl text-center text-sm font-bold shadow-lg">
-              Thank you! Your integrated itinerary route values have been
-              received.
+              Thank you! We&apos;ve received your request and will be in touch
+              shortly.
             </div>
           ) : (
             <form onSubmit={handleFinalBookingSubmit} className="space-y-4">
@@ -248,7 +253,7 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs mb-1 text-blue-400 dark:text-blue-300 font-semibold">
-                    Active Property (Linked)
+                    Property Type
                   </label>
                   <select
                     name="property_type"
@@ -261,7 +266,7 @@ export default function Footer() {
                       "Townhouse",
                       "Apartment",
                       "Condo",
-                      "Commerical Building",
+                      "Commercial Building",
                       "Other",
                     ].map(opt => (
                       <option key={opt} value={opt}>
@@ -272,7 +277,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <label className="block text-xs mb-1 text-blue-400 dark:text-blue-300 font-semibold">
-                    Bedrooms (Linked)
+                    Number of Bedrooms
                   </label>
                   <select
                     name="num_bedrooms"
@@ -317,11 +322,12 @@ export default function Footer() {
       {/* Bottom Copyright Bar */}
       <div className="text-center text-gray-500 dark:text-gray-400 text-sm mt-16 pt-8 border-t border-gray-800 dark:border-slate-700">
         <p className="mb-2">
-          &copy; {new Date().getFullYear()} Designer Solutions, LLC. All rights
+          &copy; {new Date().getFullYear()} {BUSINESS.legalName}. All rights
           reserved.
         </p>
         <p className="text-xs">
-          Licensed and Insured | Serving Buckhead, GA and Atlanta Metro Area
+          Licensed and Insured | Serving {BUSINESS.primaryServiceArea}, GA and
+          Atlanta Metro Area
         </p>
       </div>
     </footer>
