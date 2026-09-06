@@ -10,11 +10,13 @@ export default function Hero({ cityName }) {
           src="/image.png"
           alt={BUSINESS.imageAlt}
           fill
-          className="object-cover brightness-110 dark:brightness-75 transition-all duration-500"
+          className="object-cover brightness-110 dark:brightness-90 transition-all duration-500"
           priority
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 dark:from-black/80 dark:via-black/70 dark:to-black/90 transition-all duration-500"></div>
+        {/* Dedicated scrim class — kept out of the global dark gradient
+            overrides so the background image stays visible in dark mode */}
+        <div className="hero-overlay absolute inset-0"></div>
       </div>
 
       {/* Foreground Content */}
