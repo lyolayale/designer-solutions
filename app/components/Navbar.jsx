@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="bg-gradient-to-r from-blue-950/95 via-blue-900/95 to-blue-950/95 text-white shadow-lg shadow-blue-950/20 sticky top-0 z-50 py-3 backdrop-blur-xl border-b border-white/10 pl-5"
+      className="bg-gradient-to-r from-blue-950/95 via-blue-900/95 to-blue-950/95 text-white shadow-lg shadow-blue-950/20 sticky top-0 z-50 py-3 backdrop-blur-xl border-b border-white/10 md:px-0 px-5"
     >
       {/* Changed flex-row to flex-col on mobile to stack the menu nicely under the top bar */}
       <section className="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center">
