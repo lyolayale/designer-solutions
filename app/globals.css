@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Tailwind v4: make dark: utilities respond to the .dark class (theme
+   toggle) instead of the OS-level prefers-color-scheme media query. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-dark-bg: #0f172a;
   --color-dark-card: #1e293b;
