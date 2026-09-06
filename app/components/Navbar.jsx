@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="bg-gradient-to-r from-blue-950/95 via-blue-900/95 to-blue-950/95 text-white shadow-lg shadow-blue-950/20 sticky top-0 z-50 py-3 backdrop-blur-xl border-b border-white/10 md:px-0 px-5"
+      className="bg-gradient-to-r from-blue-950/95 via-blue-900/95 to-blue-950/95 text-white shadow-lg shadow-blue-950/20 sticky top-0 z-50 py-3 backdrop-blur-xl border-b border-white/10 md:px-0 px-5 md:opacity-100 opacity-95"
     >
       {/* Changed flex-row to flex-col on mobile to stack the menu nicely under the top bar */}
       <section className="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center">
@@ -72,7 +72,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-white focus:outline-none p-2 hover:bg-white/10 rounded-lg transition-colors"
+              className="md:hidden text-white focus:outline-none p-2 hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
               aria-label="Toggle menu"
             >
               <svg
@@ -230,7 +230,7 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="flex items-center gap-2 text-white focus:outline-none p-2 hover:bg-white/10 rounded-lg transition-colors"
+                className="flex items-center gap-2 text-white focus:outline-none p-2 hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
                 aria-label="Toggle Theme"
               >
                 {theme === "light" ? (
