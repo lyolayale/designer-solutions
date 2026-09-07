@@ -2,7 +2,16 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
+import {
+  FaFacebook,
+  FaTiktok,
+  FaInstagram,
+  FaLocationDot,
+  FaPhone,
+  FaEnvelope,
+  FaGlobe,
+  FaShieldHalved,
+} from "react-icons/fa6";
 import { BUSINESS, formattedAddress } from "../../lib/business";
 
 export default function Footer() {
@@ -319,16 +328,136 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Copyright Bar */}
-      <div className="text-center text-gray-500 dark:text-gray-400 text-sm mt-16 pt-8 border-t border-gray-800 dark:border-slate-700">
-        <p className="mb-2">
-          &copy; {new Date().getFullYear()} {BUSINESS.legalName}. All rights
-          reserved.
-        </p>
-        <p className="text-xs">
-          Licensed and Insured | Serving {BUSINESS.primaryServiceArea}, GA and
-          Atlanta Metro Area
-        </p>
+      {/* Bottom Company Info & Copyright Bar */}
+      <div className="mt-16 pt-10 border-t border-gray-800 dark:border-slate-700">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+            {/* Company Identity */}
+            <div className="text-center md:text-left">
+              <p className="text-xl font-bold tracking-tight text-white">
+                <span className="text-blue-400 dark:text-blue-300">DSI</span>{" "}
+                Moving &amp; Storage
+              </p>
+              <p className="text-gray-500 dark:text-gray-400 mt-1 mb-5">
+                {BUSINESS.legalName}
+              </p>
+              {socials.length > 0 && (
+                <div className="flex justify-center md:justify-start gap-3">
+                  {socials.map(social => (
+                    <Link
+                      key={social.id}
+                      href={social.url}
+                      aria-label={social.label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 dark:bg-slate-800 border border-gray-700 dark:border-slate-600 text-gray-400 dark:text-gray-300 hover:text-white hover:bg-blue-500 hover:border-blue-500 dark:hover:bg-blue-600 dark:hover:border-blue-600 transition-all duration-300 transform hover:scale-110"
+                    >
+                      {social.icon}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Contact Details */}
+            <div className="text-center md:text-left">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-blue-400 dark:text-blue-300 mb-4">
+                Contact Us
+              </h3>
+              <ul className="space-y-3 text-gray-400 dark:text-gray-300">
+                <li className="flex items-start justify-center md:justify-start gap-3">
+                  <FaLocationDot
+                    className="mt-1 text-blue-400 dark:text-blue-300 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(formattedAddress)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
+                  >
+                    {formattedAddress}
+                  </a>
+                </li>
+                <li className="flex items-start justify-center md:justify-start gap-3">
+                  <FaPhone
+                    className="mt-1 text-blue-400 dark:text-blue-300 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <a
+                    href={`tel:${BUSINESS.phone}`}
+                    className="hover:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
+                  >
+                    {BUSINESS.phoneDisplay}
+                  </a>
+                </li>
+                <li className="flex items-start justify-center md:justify-start gap-3">
+                  <FaEnvelope
+                    className="mt-1 text-blue-400 dark:text-blue-300 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <a
+                    href={`mailto:${BUSINESS.email}`}
+                    className="hover:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
+                  >
+                    {BUSINESS.email}
+                  </a>
+                </li>
+                <li className="flex items-start justify-center md:justify-start gap-3">
+                  <FaGlobe
+                    className="mt-1 text-blue-400 dark:text-blue-300 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <a
+                    href={BUSINESS.siteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
+                  >
+                    {BUSINESS.siteUrl.replace(/^https?:\/\//, "")}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Service Area & Credentials */}
+            <div className="text-center md:text-left">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-blue-400 dark:text-blue-300 mb-4">
+                Service Area
+              </h3>
+              <div className="space-y-3 text-gray-400 dark:text-gray-300">
+                <p className="flex items-start justify-center md:justify-start gap-3">
+                  <FaLocationDot
+                    className="mt-1 text-blue-400 dark:text-blue-300 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    Proudly serving {BUSINESS.primaryServiceArea}, GA and the
+                    Atlanta Metro Area since {BUSINESS.foundingYear}.
+                  </span>
+                </p>
+                <p className="flex items-start justify-center md:justify-start gap-3">
+                  <FaShieldHalved
+                    className="mt-1 text-blue-400 dark:text-blue-300 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    Licensed &amp; Insured — {BUSINESS.yearsInBusiness} years
+                    in business.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright Strip */}
+          <div className="mt-10 pt-6 border-t border-gray-800 dark:border-slate-700 text-center text-xs text-gray-500 dark:text-gray-400">
+            <p>
+              &copy; {new Date().getFullYear()} {BUSINESS.legalName}. All
+              rights reserved.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );

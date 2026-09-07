@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import TrustBar from "./components/TrustBar";
 import Services from "./components/Services";
 import HowItWorks from "./components/HowItWorks";
+import MovingGuide from "./components/MovingGuide";
 import About from "./components/About";
 import Testimonials from "./components/Testimonials";
 import CtaBand from "./components/CtaBand";
@@ -33,6 +34,10 @@ export default function Home() {
       <Services />
 
       <HowItWorks />
+
+      <Reveal delay={100}>
+        <MovingGuide />
+      </Reveal>
 
       <section className="w-[80%] mx-auto mb-10">
         <Reveal>
